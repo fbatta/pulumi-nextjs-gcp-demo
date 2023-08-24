@@ -1,0 +1,12 @@
+{
+    "name": "pulumi-nextjs-demo",
+    "main": "index.ts",
+    "devDependencies": {
+        "@pulumi/docker": "^4.3.2",
+        "@types/node": "^16"
+    },
+    "dependencies": {
+        "@pulumi/gcp": "^6.0.0",
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}

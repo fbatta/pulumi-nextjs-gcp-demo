@@ -1,0 +1,4 @@
+encryptionsalt: v1:tszIts+cewg=:v1:crf3QEu9Prex1aLh:zKgrf7O/cFbhVzmS0E8CKbRgsnyvzQ==
+config:
+  gcp:project: pulumi-nextjs-dev
+  gcp:region: us-central1
