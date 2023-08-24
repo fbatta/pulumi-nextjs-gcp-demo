@@ -39,4 +39,4 @@ jobs:
         with:
           command: preview
           stack-name: dev
-          cloud-url: file://~
+          cloud-url: file://Pulumi.yaml
