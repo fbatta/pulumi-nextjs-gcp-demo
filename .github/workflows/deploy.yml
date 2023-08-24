@@ -39,4 +39,8 @@ jobs:
         with:
           command: preview
           stack-name: dev
-          cloud-url: file://Pulumi.yaml
+          cloud-url: file://~
+          upsert: true
+        env:
+          GOOGLE_PROJECT: pulumi-nextjs-dev
+          GOOGLE_REGION: us-central1
