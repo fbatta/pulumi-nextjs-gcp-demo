@@ -5,6 +5,10 @@ on:
 permissions:
   contents: read
   id-token: write
+env:
+  PULUMI_STACK_BUCKET_URL: gs://pulumi-nextjs-gcp-dev-stack/
+  PROJECT_ID: pulumi-nextjs-dev
+  LOCATION: us-central1
 jobs:
   deploy-to-gcp:
     runs-on: ubuntu-latest
@@ -42,6 +46,11 @@ jobs:
         name: gcloud CLI info
         run: gcloud info
 
+      - id: gcloud-create-stack-bucket
+        name: Create dev stack bucket
+        run:  gcloud storage buckets create ${{ env.PULUMI_STACK_BUCKET_URL }} --project=${{ env.PROJECT_ID }} --location=${{ env.LOCATION }} --public-access-prevention
+        continue-on-error: true
+
       - id: npm-install
         name: NPM install
         run: npm install
@@ -52,9 +61,5 @@ jobs:
         with:
           command: up
           stack-name: dev
-          cloud-url: file://~
+          cloud-url: ${{ env.PULUMI_STACK_BUCKET_URL }}
           upsert: true
-        env:
-          GOOGLE_PROJECT: pulumi-nextjs-dev
-          GOOGLE_REGION: us-central1
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
