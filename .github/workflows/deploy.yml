@@ -39,4 +39,4 @@ jobs:
         with:
           command: preview
           stack-name: dev
-          comment-on-summary: true
+          cloud-url: file://~
