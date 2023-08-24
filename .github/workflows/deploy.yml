@@ -44,4 +44,4 @@ jobs:
         env:
           GOOGLE_PROJECT: pulumi-nextjs-dev
           GOOGLE_REGION: us-central1
-          PULUMI_CONFIG_PASSPHRASE: abc123
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
