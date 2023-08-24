@@ -46,11 +46,11 @@ jobs:
         name: NPM install
         run: npm install
 
-      - id: pulumi-preview
-        name: Pulumi preview
+      - id: pulumi-up
+        name: Pulumi up
         uses: pulumi/actions@v4
         with:
-          command: preview
+          command: up
           stack-name: dev
           cloud-url: file://~
           upsert: true
