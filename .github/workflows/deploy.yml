@@ -1,0 +1,42 @@
+name: Deploy to GCP
+run-name: ${{ github.actor }} is deploying to GCP
+on:
+  - push
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  deploy-to-gcp:
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        uses: actions/checkout@v3
+
+      - id: node-setup
+        name: Setup Node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - id: oidc-auth
+        name: Authenticate to GCP with OIDC
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: projects/454968290762/locations/global/workloadIdentityPools/default-pool/providers/github
+          service_account: pulumi-deployer@pulumi-nextjs-dev.iam.gserviceaccount.com
+      
+      - id: gcloud-setup
+        name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - id: npm-install
+        name: NPM install
+        run: npm install
+
+      - id: pulumi-preview
+        name: Pulumi preview
+        uses: pulumi/actions@v4
+        with:
+          command: preview
+          stack-name: dev
+          comment-on-summary: true
